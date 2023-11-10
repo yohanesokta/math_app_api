@@ -11,6 +11,10 @@ const Routes = (App) => {
         mongo.create_data_soal(req, res);
     });
 
+    App.get('/api/create/soal',(req,res)=>{
+        mongo.add_soal_data(req,res)
+    })
+
     App.get("*", (req, res) => {
         res.status(404).json(
             sendResponse("", "0", "Path Not Found", "Not Found", 404)

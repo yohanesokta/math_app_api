@@ -28,6 +28,7 @@ class mongodb_system {
     async data_get_all(res) {
         try {
             await client.connect();
+            console.log('mongo_db find data all')
             let promise = await db.collection("soal").find().toArray();
             res.json(sendResponse(promise));
         } finally {
@@ -45,12 +46,37 @@ class mongodb_system {
 
         try {
             await client.connect()
-            await db.collection('soal').Soal.insertOne(data);
-            res.json(sendResponse('', '', 'Data Added Succses'))
+            await db.collection('soal').insertOne(data);
+            res.json(sendResponse(data, '', 'Data Added Succses'))
         }
         finally {
             await client.close();
         }
+    }
+
+    async add_soal_data(req,res){
+        /*
+            data yang dibutuhkan 
+            { type , isi , id , images , token (token dari soal)}
+        */
+        let data = {
+            'type': req.query.type,
+            'isi': req.query.isi,
+            'id': req.query.id,
+            'images': req.query.images || 'non-images',
+        }
+        try{
+            await client.connect();
+            await db.collection('soal').updateOne(
+                {token:req.query.token},
+                {$push : {'Soal' : data}}
+            );
+            res.json(sendResponse(data,1,'Succses Add Soal'))
+        }
+        finally{
+            await client.close();
+        }
+
     }
 }
 
