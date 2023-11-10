@@ -35,6 +35,17 @@ class mongodb_system {
             await client.close();
         }
     }
+    async check_data_token(req,res){
+        try{
+            await client.connect();
+            console.log('client connected -> find token data')
+            let promise = await db.collection('soal').find({"token" : req.query.token}).toArray();
+            res.json({"token" : Object.keys(promise).length})
+        }
+        finally{
+            await client.close();
+        }
+    }
     // 
     async create_data_soal(req, res) {
         let data = {
@@ -55,10 +66,6 @@ class mongodb_system {
     }
 
     async add_soal_data(req,res){
-        /*
-            data yang dibutuhkan 
-            { type , isi , id , images , token (token dari soal)}
-        */
         let data = {
             'type': req.query.type,
             'isi': req.query.isi,
