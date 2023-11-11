@@ -67,10 +67,10 @@ class mongodb_system {
         }
     }
 
-    async add_soal_data(req, res) {
+    async add_soal_materi(req, res) {
         let data = {
-            'id': create_UUID(),
-            'type': req.query.type,
+            'id': create_UUID() + '_materi',
+            'type': 'materi',
             'isi': req.query.isi,
             'images': req.query.images || 'non-images',
         }
@@ -87,6 +87,50 @@ class mongodb_system {
         }
 
     }
+
+    async add_data_soal(req, res) {
+
+        let data = {
+            'id': create_UUID() + '_soal',
+            'type': 'soal',
+            'image': req.query.image || 'none',
+            'isi': req.query.isi,
+            'ans1': req.query.ans1,
+            'ans2': req.query.ans2,
+            'ans3': req.query.ans3,
+            'ans4': req.query.ans4,
+            'key': req.query.key
+        }
+        try {
+            await client.connect();
+            await db.collection('soal').updateOne(
+                { token: req.query.token },
+                { $push: { 'Soal': data } }
+            );
+            res.json(sendResponse(data, 1, 'Succses Add Soal'))
+        }
+        finally {
+            await client.close();
+        }
+    }
+
+    async add_data_user(req, res) {
+        let data = {
+            name: req.query.username,
+            score: req.query.score
+        }
+        try {
+            await client.connect()
+            await db.collection('soal').updateOne(
+                { token: req.query.token },
+                { $push: { 'users': data } }
+            );
+            res.json(sendResponse(data, '', "Succsess add users"))
+        }
+        finally {
+
+        }
+    }
     async get_main_soal(req, res) {
         try {
             await client.connect();
@@ -94,7 +138,7 @@ class mongodb_system {
             res.json(sendResponse(promise, 'GET DATA SOAL'))
         }
         finally {
-
+            await client.close();
         }
     }
 }

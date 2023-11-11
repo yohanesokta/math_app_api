@@ -16,14 +16,21 @@ const Routes = (App) => {
         mongo.create_data_soal(req, res);
     });
 
-    App.get('/api/create/soal', (req, res) => {
-        // { type , isi  , images , token (token dari soal)}
-        mongo.add_soal_data(req, res)
+    App.get('/api/create/materi', (req, res) => {
+        // {isi  , images , token (token dari soal)}
+        mongo.add_soal_materi(req, res)
     })
     App.get('/api/validation/token', (req, res) => {
         mongo.check_data_token(req, res)
     })
+    App.get('/api/create/users', (req, res) => {
+        //  {toke , username , score}
+        mongo.add_data_user(req, res)
+    })
 
+    App.get('/api/create/soal', (req, res) => {
+        mongo.add_data_soal(req, res)
+    })
     App.get("*", (req, res) => {
         res.status(404).json(
             sendResponse("", "0", "Path Not Found", "Not Found", 404)
