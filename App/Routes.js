@@ -7,17 +7,21 @@ const Routes = (App) => {
     App.get("/api/get", (req, res) => {
         mongo.data_get_all(res);
     });
+    App.get("/api/get/soal", (req, res) => {
+        // require ( token )
+        mongo.get_main_soal(req, res);
+    })
     App.get("/api/create", (req, res) => {
         //  { nama , token , owner }
         mongo.create_data_soal(req, res);
     });
 
-    App.get('/api/create/soal',(req,res)=>{
-        // { type , isi , id , images , token (token dari soal)}
-        mongo.add_soal_data(req,res)
+    App.get('/api/create/soal', (req, res) => {
+        // { type , isi  , images , token (token dari soal)}
+        mongo.add_soal_data(req, res)
     })
-    App.get('/api/validation/token',(req,res)=>{
-        mongo.check_data_token(req,res)
+    App.get('/api/validation/token', (req, res) => {
+        mongo.check_data_token(req, res)
     })
 
     App.get("*", (req, res) => {

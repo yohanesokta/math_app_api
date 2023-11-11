@@ -1,6 +1,7 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const { sendResponse } = require("../Components/Response");
 require("dotenv").config();
+const { create_UUID } = require('../Components/randomID')
 
 /*
     Setup variable untuk awal landasan constant fungsi
@@ -35,14 +36,14 @@ class mongodb_system {
             await client.close();
         }
     }
-    async check_data_token(req,res){
-        try{
+    async check_data_token(req, res) {
+        try {
             await client.connect();
             console.log('client connected -> find token data')
-            let promise = await db.collection('soal').find({"token" : req.query.token}).toArray();
-            res.json({"token" : Object.keys(promise).length})
+            let promise = await db.collection('soal').find({ "token": req.query.token }).toArray();
+            res.json(sendResponse('', Object.keys(promise).length, 'Available Data Check'))
         }
-        finally{
+        finally {
             await client.close();
         }
     }
@@ -52,7 +53,8 @@ class mongodb_system {
             'nama': req.query.nama || 'null',
             'token': req.query.token || 'null',
             'owner': req.query.owner || 'null',
-            'Soal': []
+            'Soal': [],
+            'users': []
         };
 
         try {
@@ -65,25 +67,35 @@ class mongodb_system {
         }
     }
 
-    async add_soal_data(req,res){
+    async add_soal_data(req, res) {
         let data = {
+            'id': create_UUID(),
             'type': req.query.type,
             'isi': req.query.isi,
-            'id': req.query.id,
             'images': req.query.images || 'non-images',
         }
-        try{
+        try {
             await client.connect();
             await db.collection('soal').updateOne(
-                {token:req.query.token},
-                {$push : {'Soal' : data}}
+                { token: req.query.token },
+                { $push: { 'Soal': data } }
             );
-            res.json(sendResponse(data,1,'Succses Add Soal'))
+            res.json(sendResponse(data, 1, 'Succses Add Soal'))
         }
-        finally{
+        finally {
             await client.close();
         }
 
+    }
+    async get_main_soal(req, res) {
+        try {
+            await client.connect();
+            let promise = await db.collection('soal').find({ 'token': req.query.token }).toArray();
+            res.json(sendResponse(promise, 'GET DATA SOAL'))
+        }
+        finally {
+
+        }
     }
 }
 
