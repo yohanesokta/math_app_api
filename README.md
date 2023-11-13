@@ -46,6 +46,7 @@ ini untuk pengecekan token sudah dipakai belum karena token dibuat untuk bisa di
 | :-------- | :------- | :------------------------------ |
 | `nama`    | `string` | **Required**. Nama untuk Soal ! |
 | `token`   | `string` | **Required**. token soal        |
+| `link`    | `string` | **Required**. link video        |
 | `owner`   | `string` | **Required**. owner soal        |
 
 Document ini berisi soal yang digunakan sebagai document utama yang akan diambil

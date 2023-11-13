@@ -54,6 +54,7 @@ class mongodb_system {
             'nama': req.query.nama || 'null',
             'token': req.query.token || 'null',
             'owner': req.query.owner || 'null',
+            'link' : req.query.link || 'null',
             'Soal': [],
             'users': []
         };
