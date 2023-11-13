@@ -31,6 +31,11 @@ const Routes = (App) => {
     App.get('/api/create/soal', (req, res) => {
         mongo.add_data_soal(req, res)
     })
+    App.get('/', (req, res) => {
+        res.json(
+            sendResponse('IS A HOMEPATH', 1, "Wellcome to API on Github")
+        )
+    })
     App.get("*", (req, res) => {
         res.status(404).json(
             sendResponse("", "0", "Path Not Found", "Not Found", 404)

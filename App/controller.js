@@ -38,10 +38,11 @@ class mongodb_system {
     }
     async check_data_token(req, res) {
         try {
+            let token = req.query.token
             await client.connect();
             console.log('client connected -> find token data')
-            let promise = await db.collection('soal').find({ "token": req.query.token }).toArray();
-            res.json(sendResponse('', Object.keys(promise).length, 'Available Data Check'))
+            let promise = await db.collection('soal').find({ "token": token }).toArray();
+            res.json(sendResponse(token, Object.keys(promise).length, 'Available Data Check'))
         }
         finally {
             await client.close();
