@@ -63,6 +63,7 @@ Document ini berisi soal yang digunakan sebagai document utama yang akan diambil
 | :-------- | :------- | :----------------------- |
 | `isi`     | `string` | **Required**. isi Soal   |
 | `token`   | `string` | **Required**. token soal |
+| `name`    | `string` | **Required**. Nama Soal  |
 | `image`   | `string` | **Not Required**. Images |
 
 Document ini berisi isi materi yang berada di Document Soal ( bingung gak ? 😁)
@@ -79,6 +80,7 @@ Document ini berisi isi materi yang berada di Document Soal ( bingung gak ? 😁
 | :-------- | :------- | :---------------------------------- |
 | `isi`     | `string` | **Required**. isi Soal Penilaian    |
 | `token`   | `string` | **Required**. token soal            |
+| `name`    | `string` | **Required**. Nama Soal  |
 | `image`   | `string` | **Not Required**. Images            |
 | `ans1`    | `string` | **Required**. kemungkinan jawaban 1 |
 | `ans2`    | `string` | **Required**. kemungkinan jawaban 2 |

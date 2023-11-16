@@ -73,6 +73,7 @@ class mongodb_system {
         let data = {
             'id': create_UUID() + '_materi',
             'type': 'materi',
+            'name':req.query.name,
             'isi': req.query.isi,
             'images': req.query.images || 'non-images',
         }
@@ -95,6 +96,7 @@ class mongodb_system {
         let data = {
             'id': create_UUID() + '_soal',
             'type': 'soal',
+            'name': req.query.name,
             'image': req.query.image || 'none',
             'isi': req.query.isi,
             'ans1': req.query.ans1,
