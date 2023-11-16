@@ -7,7 +7,7 @@ kenapa dibikin ? , kebutuhan untuk membuat aplikasi ku agar bisa membuat soal da
 #### Get all items
 
 ```http
-  GET /api/get
+  POST /api/get
 ```
 
 tidak ada request kusus untuk routes ini
@@ -15,7 +15,7 @@ tidak ada request kusus untuk routes ini
 #### Get One Soal Item
 
 ```http
-  GET /api/get/soal{token}
+  POST /api/get/soal{token}
 ```
 
 | Parameter | Type     | Description             |
@@ -25,7 +25,7 @@ tidak ada request kusus untuk routes ini
 #### Cek Token
 
 ```http
-  GET /api/validation/token{token}
+  POST /api/validation/token{token}
 ```
 
 | Parameter | Type     | Description             |
@@ -39,7 +39,7 @@ ini untuk pengecekan token sudah dipakai belum karena token dibuat untuk bisa di
 #### Create Data Soal (Document)
 
 ```http
-  GET /api/create
+  POST /api/create
 ```
 
 | Parameter | Type     | Description                     |
@@ -56,7 +56,7 @@ Document ini berisi soal yang digunakan sebagai document utama yang akan diambil
 #### Create materi (Document->materi)
 
 ```http
-  GET /api/create/materi
+  POST /api/create/materi
 ```
 
 | Parameter | Type     | Description              |
@@ -72,7 +72,7 @@ Document ini berisi isi materi yang berada di Document Soal ( bingung gak ? 😁
 #### Create Penilaian Soal (Document->materi)
 
 ```http
-  GET /api/create/soal
+  POST /api/create/soal
 ```
 
 | Parameter | Type     | Description                         |
